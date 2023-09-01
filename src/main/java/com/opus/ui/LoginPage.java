@@ -1,17 +1,13 @@
 package com.opus.ui;
 
-import com.opus.webdriver.WebDriverFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 @Component
 @Slf4j
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     @FindBy(id = "user-name")
     private WebElement usernameInput;
 
@@ -25,8 +21,9 @@ public class LoginPage extends BasePage{
     protected boolean isInitialized() {
         return isVisible(loginButton);
     }
-    public void enterTextToInput(String input, String text){
-        switch (input){
+
+    public void enterTextToInput(String input, String text) {
+        switch (input) {
             case "username":
                 sendKeysToElement(usernameInput, text);
                 break;
@@ -37,8 +34,9 @@ public class LoginPage extends BasePage{
                 throw new IllegalArgumentException(input + " does not exists!");
         }
     }
-    public void clickOnButton(String element){
-        switch (element){
+
+    public void clickOnButton(String element) {
+        switch (element) {
             case "login":
                 clickOnElement(loginButton);
                 break;

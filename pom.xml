@@ -10,7 +10,7 @@
 
     <properties>
         <!-- Versions -->
-        <springboot.version>2.6.2</springboot.version>
+        <springboot.version>2.6.15</springboot.version>
         <junit.version>5.9.3</junit.version>
         <cucumber.version>7.13.0</cucumber.version>
         <junit-platform.version>1.8.2</junit-platform.version>
