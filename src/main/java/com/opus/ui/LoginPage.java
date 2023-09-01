@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
         return isVisible(loginButton);
     }
 
-    public void enterTextToInput(String input, String text) {
+    protected void enterTextToInput(String input, String text) {
         switch (input) {
             case "username":
                 sendKeysToElement(usernameInput, text);
@@ -35,13 +35,13 @@ public class LoginPage extends BasePage {
         }
     }
 
-    public void clickOnButton(String element) {
+    protected void clickOnButton(String element) {
         switch (element) {
             case "login":
                 clickOnElement(loginButton);
                 break;
             default:
-                throw new IllegalArgumentException(loginButton + " does not exists!");
+                throw new IllegalArgumentException(element + " does not exists!");
         }
     }
 }

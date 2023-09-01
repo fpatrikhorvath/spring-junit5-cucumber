@@ -17,6 +17,11 @@ public abstract class BasePage extends WebDriverFactory {
         element.click();
     }
     protected boolean isVisible(WebElement element){
-        return element.isDisplayed();
+        try {
+            return element.isDisplayed();
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 }

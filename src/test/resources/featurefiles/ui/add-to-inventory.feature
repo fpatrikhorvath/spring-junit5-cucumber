@@ -1,0 +1,18 @@
+@ui @smoke
+  Feature: TODO
+
+    Background: TODO
+      Given the user opens the "https://www.saucedemo.com"
+      And I want to see the thread id in the log
+      And the user types in the "standard_user" as "username" on the login page
+      And the user types in the "secret_sauce" as "password" on the login page
+      And the user presses the "login" button on the login page
+
+      Scenario: TODO
+        When the user presses the "add backpack to cart" button on the inventory page
+        Then the user see the "remove backpack from cart" button on the inventory page
+        And the user do not see the "add backpack to cart" button on the inventory page
+
+    Scenario: TODO
+      Then the user see the "add backpack to cart" button on the inventory page
+      And the user do not see the "remove backpack from cart" button on the inventory page
