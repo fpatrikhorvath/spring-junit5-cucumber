@@ -1,4 +1,4 @@
-@ui @smoke
+@ui
   Feature: TODO
 
     Background: TODO
@@ -16,4 +16,3 @@
       When the user presses the "add backpack to cart" button on the inventory page
       When the user presses the "cart" button on the inventory page
       Then the user is on the cart page
-

@@ -52,10 +52,4 @@ public class ApiCallSteps {
         System.out.println(response.getBody().asString());
         System.out.println("-------------------------------------------------------------------");
     }
-
-    @And("I want to see the thread id in the log")
-    public void iWantToSeeTheThreadIdInTheLog() {
-        System.out.println("------------" + Thread.currentThread().getId() + "-----------------");
-
-    }
 }

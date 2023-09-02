@@ -40,4 +40,11 @@ public class InventorySteps extends InventoryPage {
         String message = "The add to the cart button did not appear.";
         assertFalse(isDisplayed, message);
     }
+
+    @Then("the user see the {string} on the inventory page")
+    public void theMenuAppearsOnTheInventoryPage(String element) {
+        boolean isDisplayed = isDisplayed(element);
+        String message = "The element is not visible.";
+        assertTrue(isDisplayed, message);
+    }
 }

@@ -12,6 +12,12 @@ public class InventoryPage extends BasePage{
     private WebElement addBackpackToCartButton;
     @FindBy(id = "remove-sauce-labs-backpack")
     private WebElement removeBackpackFromCartButton;
+    @FindBy(xpath = "//img[@alt='Open Menu']/..")
+    private WebElement openMenuButton;
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logoutButton;
+    @FindBy(id = "//div[@class='bm-item-list']")
+    private WebElement menu;
     @Override
     protected boolean isInitialized() {
         return isVisible(mainElement);
@@ -24,6 +30,12 @@ public class InventoryPage extends BasePage{
             case "add backpack to cart":
                 clickOnElement(addBackpackToCartButton);
                 break;
+            case "open the menu":
+                clickOnElement(openMenuButton);
+                break;
+            case "logout":
+                clickOnElement(logoutButton);
+                break;
             default:
                 throw new IllegalArgumentException(element + " does not exists!");
         }
@@ -34,6 +46,10 @@ public class InventoryPage extends BasePage{
                 return isVisible(removeBackpackFromCartButton);
             case "add backpack to cart":
                 return isVisible(addBackpackToCartButton);
+            case "menu":
+                return isVisible(menu);
+            case "login button":
+                return isVisible(logoutButton);
             default:
                 throw new IllegalArgumentException(element + " does not exists!");
         }

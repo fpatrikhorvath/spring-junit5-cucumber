@@ -21,6 +21,7 @@ public abstract class BasePage extends WebDriverFactory {
             return element.isDisplayed();
         }
         catch (Exception e){
+            log.info(e.getMessage());
             return false;
         }
     }
