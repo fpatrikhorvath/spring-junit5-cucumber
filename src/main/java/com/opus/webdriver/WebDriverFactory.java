@@ -1,17 +1,14 @@
 package com.opus.webdriver;
 
-import com.opus.ui.BasePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.Browser;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +22,7 @@ public class WebDriverFactory {
     private static boolean randomizeBrowser;
 
     private static String defaultBrowser;
+    private static boolean headless;
 
     private static final Random random = new Random();
 
@@ -41,6 +39,10 @@ public class WebDriverFactory {
     @Value("${test.browser.default}")
     public void setDefaultBrowser(String defaultBrowser) {
         WebDriverFactory.defaultBrowser = defaultBrowser;
+    }
+    @Value("${app.headless}")
+    public void setHeadless(boolean headless) {
+        WebDriverFactory.headless = headless;
     }
 
     public static WebDriver getDriver() {
@@ -83,6 +85,7 @@ public class WebDriverFactory {
     private static WebDriver createLocalChromeDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
+        if (headless) chromeOptions.addArguments("--headless");
         WebDriver webDriver = new ChromeDriver(chromeOptions);
         setBasicWebDriverProperties(webDriver);
         return webDriver;
