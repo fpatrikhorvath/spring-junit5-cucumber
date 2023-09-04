@@ -1,10 +1,9 @@
 @api @smoke
-Feature: TODO
+Feature: Checking that I am be able to send requests to the /404 endpoint
 
-  Background: TODO
+  Background: I set the base URI and path to the given values
     Given I set the base uri to "https://the-internet.herokuapp.com" and the base path to "/status_codes"
 
-  Scenario: TODO
+  Scenario: Sending a GET request to the /404
     When I send a GET request to the "/404" endpoint
-    And I want to see the thread id in the log
     Then I see 404 as response code

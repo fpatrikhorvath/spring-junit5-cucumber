@@ -4,15 +4,16 @@ As the java 8 is not getting more updates for selenium, it's time to learn java 
 
 You can run it with the following command (Copy & paste it into the CLI)
 ```
- mvn clean test -D"cucumber.filter.tags=@smoke"
+ mvn clean test
 ```
-Implemented technologies:
+
+Technologies:
 ```
-Java 11
-Springboot
-Maven
+Java 11 Springboot
+Webdriver manage
 Gherkin/Cucumber
+Surefire plugin
 Rest Assured
-Webdriver manager
 Junit5
+Maven
 ```

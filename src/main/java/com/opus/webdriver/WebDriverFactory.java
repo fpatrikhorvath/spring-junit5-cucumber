@@ -9,37 +9,19 @@ import org.openqa.selenium.remote.Browser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Random;
-
 @Component
 @Slf4j
 public class WebDriverFactory {
     private static final ThreadLocal<WebDriver> THREAD_LOCAL_DRIVER = new ThreadLocal<>();
 
-    private static List<String> BROWSER_LIST;
-
-    private static boolean randomizeBrowser;
-
-    private static String defaultBrowser;
+    private static String browser;
     private static boolean headless;
 
-    private static final Random random = new Random();
-
-    @Value("#{'${test.browser.list}'.split(',')}")
-    public void setBrowserList(List<String> browserList) {
-        BROWSER_LIST = browserList;
-    }
-
-    @Value("${test.browser.randomize}")
-    public void setRandomizeBrowser(boolean randomizeBrowser) {
-        WebDriverFactory.randomizeBrowser = randomizeBrowser;
-    }
-
     @Value("${test.browser.default}")
-    public void setDefaultBrowser(String defaultBrowser) {
-        WebDriverFactory.defaultBrowser = defaultBrowser;
+    public void setDefaultBrowser(String browser) {
+        WebDriverFactory.browser = browser;
     }
+
     @Value("${app.headless}")
     public void setHeadless(boolean headless) {
         WebDriverFactory.headless = headless;
@@ -68,11 +50,7 @@ public class WebDriverFactory {
     }
 
     public static void createDriver() {
-        String browserType = defaultBrowser;
-        if (randomizeBrowser) {
-            int randomItem = random.nextInt(BROWSER_LIST.size());
-            browserType = BROWSER_LIST.get(randomItem);
-        }
+        String browserType = browser;
         log.info("Using browser type: {}", browserType);
         if (Browser.CHROME.is(browserType)) {
             THREAD_LOCAL_DRIVER.set(createLocalChromeDriver());

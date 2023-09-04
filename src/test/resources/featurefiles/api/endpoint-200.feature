@@ -1,10 +1,9 @@
 @api @smoke
-Feature: TODO
+Feature: Checking that I am be able to send requests to the /200 endpoint
 
-  Background:
+  Background: I set the base URI and path to the given values
     Given I set the base uri to "https://the-internet.herokuapp.com" and the base path to "/status_codes"
 
-  Scenario: TODO
+  Scenario: I send a GET request to the /200 endpoint and checking that the response is proper
     When I send a GET request to the "/200" endpoint
-    And I want to see the thread id in the log
     Then I see 200 as response code
