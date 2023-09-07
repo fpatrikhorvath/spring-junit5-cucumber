@@ -1,3 +1,4 @@
+
 package com.opus.webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -8,7 +9,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.Browser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
+/**
+ * A factory class for creating and managing WebDriver instances for web automation.
+ * This class supports the creation of Chrome WebDriver instances with optional headless mode.
+ */
 @Component
 @Slf4j
 public class WebDriverFactory {
@@ -26,7 +30,12 @@ public class WebDriverFactory {
     public void setHeadless(boolean headless) {
         WebDriverFactory.headless = headless;
     }
-
+    /**
+     * Retrieves the current WebDriver instance associated with the current thread.
+     *
+     * @return The WebDriver instance.
+     * @throws RuntimeException if the WebDriver instance is null.
+     */
     public static WebDriver getDriver() {
         if (THREAD_LOCAL_DRIVER.get() != null) {
             return THREAD_LOCAL_DRIVER.get();
@@ -35,12 +44,13 @@ public class WebDriverFactory {
             throw new RuntimeException("Webdriver is null and it should not be.");
         }
     }
-
+    /**
+     * Cleans up and quits the WebDriver instance associated with the current thread.
+     */
     public static void cleanUpDriver() {
         WebDriverFactory.quitDriver();
         WebDriverFactory.removeDriver();
     }
-
     private static void quitDriver() {
         if (THREAD_LOCAL_DRIVER.get() != null) THREAD_LOCAL_DRIVER.get().quit();
     }
@@ -49,6 +59,9 @@ public class WebDriverFactory {
         if (THREAD_LOCAL_DRIVER.get() != null) THREAD_LOCAL_DRIVER.remove();
     }
 
+    /**
+     * Initialize the driver, sets it thread local.
+     */
     public static void createDriver() {
         String browserType = browser;
         log.info("Using browser type: {}", browserType);
@@ -59,7 +72,9 @@ public class WebDriverFactory {
             throw new RuntimeException("Unknown browser type entered.");
         }
     }
-
+    /**
+     * Creates a new instance of the Chrome WebDriver with optional params, like headless mode.
+     */
     private static WebDriver createLocalChromeDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -68,7 +83,11 @@ public class WebDriverFactory {
         setBasicWebDriverProperties(webDriver);
         return webDriver;
     }
-
+    /**
+     * Sets basic WebDriver properties, such as maximizing the window.
+     *
+     * @param driver The WebDriver instance to configure.
+     */
     private static void setBasicWebDriverProperties(WebDriver driver) {
         driver.manage().window().maximize();
     }

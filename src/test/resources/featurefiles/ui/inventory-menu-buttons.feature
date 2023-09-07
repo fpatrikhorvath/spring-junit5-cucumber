@@ -17,4 +17,3 @@ Feature: As a user I should be able to
       Given the user presses the "open the menu" button on the inventory page
       When the user presses the "logout" button on the inventory page
       Then the user is on the login page
-

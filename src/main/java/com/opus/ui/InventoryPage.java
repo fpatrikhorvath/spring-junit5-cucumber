@@ -3,7 +3,7 @@ package com.opus.ui;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class InventoryPage extends BasePage{
+public class InventoryPage extends BasePage {
     @FindBy(id = "inventory_container")
     private WebElement mainElement;
     @FindBy(id = "shopping_cart_container")
@@ -18,10 +18,22 @@ public class InventoryPage extends BasePage{
     private WebElement logoutButton;
     @FindBy(id = "//div[@class='bm-item-list']")
     private WebElement menu;
+
+    /**
+     * Returns the visibility state of the inventory page.
+     *
+     * @return
+     */
     @Override
     protected boolean isInitialized() {
         return isVisible(mainElement);
     }
+
+    /**
+     * Performs a click on the given button.
+     *
+     * @param element is the name of the button.
+     */
     protected void clickOnButton(String element) {
         switch (element) {
             case "cart":
@@ -40,8 +52,15 @@ public class InventoryPage extends BasePage{
                 throw new IllegalArgumentException(element + " does not exists!");
         }
     }
-    protected boolean isDisplayed(String element){
-        switch (element){
+
+    /**
+     * Returns the visibility state of the specified element
+     *
+     * @param element is the name of the element.
+     * @return the visibility state of the given element.
+     */
+    protected boolean isDisplayed(String element) {
+        switch (element) {
             case "remove backpack from cart":
                 return isVisible(removeBackpackFromCartButton);
             case "add backpack to cart":

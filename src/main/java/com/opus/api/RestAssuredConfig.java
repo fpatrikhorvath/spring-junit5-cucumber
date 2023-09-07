@@ -7,12 +7,4 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RestAssuredConfig {
-
-    //@Value("${api.base-url}")
-    //private String baseUrl;
-
-    //@Bean
-    //public void configureRestAssured() {
-    //    RestAssured.baseURI = baseUrl;
-    //}
 }
