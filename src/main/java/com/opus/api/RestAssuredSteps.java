@@ -1,6 +1,8 @@
 package com.opus.api;
 
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.springframework.stereotype.Component;
 
 import static io.restassured.RestAssured.given;
@@ -10,6 +12,24 @@ import static io.restassured.RestAssured.given;
  */
 @Component
 public class RestAssuredSteps {
+    private RequestSpecification requestSpec;
+
+    public RestAssuredSteps(){
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        requestSpec = builder.build();
+    }
+
+    /**
+     * Sets the base URI and path for the API requests.
+     *
+     * @param uri  The base URI to be used for API requests.
+     * @param path The base path to be used for API requests.
+     */
+    public void setUriAndPath(String uri, String path) {
+        requestSpec.baseUri(uri);
+        requestSpec.basePath(path);
+    }
+
     /**
      * Sends a RestAssured GET request to the specified endpoint.
      *
@@ -18,11 +38,9 @@ public class RestAssuredSteps {
      */
     public Response sendGetRequest(String endpoint) {
         return given()
+                .spec(requestSpec)
                 .when()
-                .get(endpoint)
-                .then()
-                .extract()
-                .response();
+                .get(endpoint);
     }
 
     /**
@@ -34,12 +52,10 @@ public class RestAssuredSteps {
      */
     public Response sendPostRequest(String endpoint, String requestBody) {
         return given()
+                .spec(requestSpec)
                 .body(requestBody)
                 .when()
-                .post(endpoint)
-                .then()
-                .extract()
-                .response();
+                .post(endpoint);
     }
 
     /**
@@ -51,12 +67,10 @@ public class RestAssuredSteps {
      */
     public Response sendPutRequest(String endpoint, String requestBody) {
         return given()
+                .spec(requestSpec)
                 .body(requestBody)
                 .when()
-                .put(endpoint)
-                .then()
-                .extract()
-                .response();
+                .put(endpoint);
     }
 
     /**
@@ -67,11 +81,9 @@ public class RestAssuredSteps {
      */
     public Response sendDeleteRequest(String endpoint) {
         return given()
+                .spec(requestSpec)
                 .when()
-                .delete(endpoint)
-                .then()
-                .extract()
-                .response();
+                .delete(endpoint);
     }
 
     /**
@@ -83,11 +95,9 @@ public class RestAssuredSteps {
      */
     public Response sendPatchRequest(String endpoint, String requestBody) {
         return given()
+                .spec(requestSpec)
                 .body(requestBody)
                 .when()
-                .patch(endpoint)
-                .then()
-                .extract()
-                .response();
+                .patch(endpoint);
     }
 }

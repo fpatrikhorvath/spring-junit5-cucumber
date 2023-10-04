@@ -2,10 +2,8 @@ package com.opus.steps.api;
 
 import com.opus.api.RestAssuredSteps;
 import io.restassured.RestAssured;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RedirectConfig;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
-public class ApiCallSteps {
-    @Autowired
-    private RestAssuredSteps restAssuredSteps;
+public class BasicApiSteps extends RestAssuredSteps{
     Response response;
-    String baseUri, basePath;
+
 
     /**
      * Sets the base URI and the base path to the given value for the Rest Assured.
@@ -28,8 +24,7 @@ public class ApiCallSteps {
      */
     @Given("I set the base uri to {string} and the base path to {string}")
     public void iSetTheBaseUriToAndTheBasePathTo(String uri, String path) {
-        baseUri = uri;
-        basePath = path;
+        setUriAndPath(uri,path);
     }
 
     /**
@@ -51,7 +46,7 @@ public class ApiCallSteps {
      */
     @Given("I send a GET request to the {string} endpoint")
     public void iSendAGETRequestToTheEndpoint(String endpoint) {
-        response = restAssuredSteps.sendGetRequest(baseUri + basePath + endpoint);
+        response = sendGetRequest(endpoint);
     }
 
     /**
